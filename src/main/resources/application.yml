@@ -1,0 +1,103 @@
+# Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+server:
+  #port: 8080
+  compression:
+    enabled: true
+    mime-types: application/hal+json
+    min-response-size: 2KB
+  error.whitelabel.enabled: false
+  http2.enabled: true
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.3
+    key-alias: microservice
+    key-password: zimmermann
+    key-store: classpath:keystore.p12
+    key-store-password: zimmermann
+    key-store-type: PKCS12
+    protocol: TLS
+    trust-store: classpath:truststore.p12
+    trust-store-password: zimmermann
+    trust-store-type: PKCS12
+  shutdown: graceful
+
+spring:
+  aop.proxy-target-class: false
+  application.name: kunde
+  # siehe org.springframework.boot.autoconfigure.jackson.JacksonProperties
+  jackson:
+    default-property-inclusion: non_null
+    # siehe com.fasterxml.jackson.databind.DeserializationFeature
+    deserialization:
+      read-enums-using-to-string: true
+    # siehe com.fasterxml.jackson.databind.SerializationFeature
+    serialization:
+      write-enums-using-to-string: true
+  lifecycle.timeout-per-shutdown-phase: 3s
+  main.lazy-initialization: true
+  mvc.problemdetails.enabled: true
+  # fuer Images mit GraalVM Native
+  native.remove-unused-autoconfig: true
+  security.user.password: p
+  spel.ignore: true
+
+management:
+  endpoints.web.exposure.include: "*"
+  #endpoint.shutdown.enabled: true
+  metrics.tags.application: kunde
+
+info.app:
+  author: Juergen Zimmermann
+  lecture: Softwarearchitektur und Microservices
+  semester: 3 und 5
+  course: Wirtschaftsinformatik und Informatik
+
+---
+# alternativ: azure_app_service, sap, heroku
+spring.config.activate.on-cloud-platform: kubernetes
+management.endpoint.health:
+  enabled: true
+  probes.enabled: true
+  show-details: ALWAYS
+spring.lifecycle.timeout-per-shutdown-phase: 30s
+
+---
+spring:
+  config.activate.on-profile: dev
+  # https://stackoverflow.com/questions/53723613/how-to-set-enableloggingrequestdetails-true-in-spring-boot#answer-62817587
+  mvc.log-request-details: true
+  # Pfad fuer GraphQL: /graphql
+  graphql:
+    # Pfad fuer GraphiQL: /graphiql
+    graphiql.enabled: true
+    # Pfad für Schema:   /graphql/schema
+    schema.printer.enabled: true
+  jackson.serialization.indent-output: true
+  #devtools:
+  #  livereload.enabled: false
+  #  restart.trigger-file: /restart.txt
+  # siehe org.springframework.boot.autoconfigure.jackson.JacksonProperties
+  # fuer HTTP-Forms
+management:
+  endpoint:
+    health:
+      enabled: true
+      probes.enabled: true
+      show-details: ALWAYS
+    shutdown.enabled: true
+  info.os.enabled: true

@@ -1,0 +1,44 @@
+// https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html
+// https://www.jetbrains.com/help/idea/http-response-handling-examples.html#checking-response-headers-body
+
+### Suche mit vorhandener Kunde-ID
+GET {{restUrl}}/00000000-0000-0000-0000-000000000001
+Accept: application/hal+json
+Authorization: Basic {{userAdmin}} {{password}}
+
+> {%
+    client.test('GET mit ID: OK', () => {
+        const status = response.status;
+        client.assert(status === 200, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('GET mit ID: application/hal+json', () => {
+        const mimeType = response.contentType.mimeType;
+        client.assert(mimeType === 'application/hal+json', `Falscher MIME-Typ: ${mimeType}`);
+    });
+
+    client.test('GET mit ID: body mit Daten', () => {
+        const body = response.body;
+        client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
+        // TODO Optional Chaining
+        const href = body._links.self.href;
+        client.assert(typeof href === 'string', `body: ${JSON.stringify(body)}`);
+        client.assert(href.match(/[A-Fa-f\d]{8}-([A-Fa-f\d]{4}-){3}[A-Fa-f\d]{12}$/).length > 0, `href: ${href}`);
+    });
+%}
+
+### Suche mit nicht-vorhandener Kunde-ID: 404 (Not Found)
+GET {{restUrl}}/ffffffff-ffff-ffff-ffff-ffffffffffff
+Authorization: Basic {{userAdmin}} {{password}}
+
+> {%
+    client.test('GET mit nicht-vorhandener Kunde-ID: Not Found', () => {
+        const status = response.status;
+        client.assert(status === 404, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('GET mit nicht-vorhandener Kunde-ID: leerer Body', () => {
+        const body = response.body;
+        client.assert(body === null, `body: ${JSON.stringify(body)}`);
+    });
+%}

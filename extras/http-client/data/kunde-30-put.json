@@ -1,0 +1,22 @@
+{
+    "nachname": "Alphaput",
+    "email": "alpha@acme.de.put",
+    "kategorie" : 1,
+    "hasNewsletter": true,
+    "geburtsdatum": "2022-01-03",
+    "umsatz": {
+        "betrag": 30,
+        "waehrung": "EUR"
+    },
+    "homepage": "https://www.acme.de.put",
+    "geschlecht": "M",
+    "familienstand": "VW",
+    "interessen": [
+        "S",
+        "R"
+    ],
+    "adresse": {
+        "plz": "33333",
+        "ort": "Ahlen"
+    }
+}

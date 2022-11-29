@@ -1,0 +1,115 @@
+### Einen neuen Kunden anlegen
+POST {{restUrl}}
+Content-Type: application/json
+
+< data/kunde-neu.json
+
+> {%
+    client.test('Einen neuen Kunden anlegen: Created', () => {
+        const status = response.status;
+        client.assert(status === 201, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('Einen neuen Kunden anlegen: location', () => {
+        const headers = response.headers;
+        client.assert(typeof headers === 'object', `headers: ${JSON.stringify(headers)}`);
+        const location = headers.valueOf('Location');
+        // TODO https://youtrack.jetbrains.com/issue/IDEA-239259/JDK-11-responseheader-is-emtpy https://youtrack.jetbrains.com/issue/IDEA-239550/JDK-11-Response-handler-doesnt-work-Nashorn-is-removed
+        client.assert(typeof location === 'string', `headers: ${JSON.stringify(headers)}`);
+        client.assert(location.match(/[A-Fa-f\d]{8}-([A-Fa-f\d]{4}-){3}[A-Fa-f\d]{12}$/).length > 0, `location: ${location}`);
+    });
+
+    client.test('Einen neuen Kunden anlegen: leerer body', () => {
+        const body = response.body;
+        client.assert(body === null, `body: ${JSON.stringify(body)}`);
+    });
+%}
+
+### Einen neuen Kunden mit bereits existierender Emailadresse anlegen: 422 (Unprocessable Entity)
+POST {{restUrl}}
+Content-Type: application/json
+
+< data/kunde-neu-email-exists.json
+
+> {%
+    client.test('Einen neuen Kunden mit bereits existierender Emailadresse anlegen: Unprocessable Entity (422)', () => {
+        const status = response.status;
+        client.assert(status === 422, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('Einen neuen Kunden mit bereits existierender Emailadresse anlegen: application/problem+json', () => {
+        const mimeType = response.contentType.mimeType;
+        client.assert(mimeType === "application/problem+json", `Falscher MIME-Typ: ${mimeType}`);
+    });
+
+    client.test('Einen neuen Kunden mit bereits existierender Emailadresse anlegen: body mit ProblemDetail', () => {
+        const body = response.body;
+        client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
+        const detail = body.detail;
+        client.assert(typeof detail === 'string' && detail === 'Die Emailadresse alpha@acme.de existiert bereits', `detail: ${JSON.stringify(detail)}`);
+    });
+%}
+
+### Einen neuen Kunden mit ungueltigen Daten anlegen: 422 (Unprocessable Entity)
+POST {{restUrl}}
+Content-Type: application/json
+
+< data/kunde-neu-invalid.json
+
+> {%
+    client.test('Einen neuen Kunden mit ungueltigen Daten anlegen: Unprocessable Entity (422)', () => {
+        const status = response.status;
+        client.assert(status === 422, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('Einen neuen Kunden mit ungueltigen Daten anlegen: application/problem+json', () => {
+        const mimeType = response.contentType.mimeType;
+        client.assert(mimeType === "application/problem+json", `Falscher MIME-Typ: ${mimeType}`);
+    });
+
+    client.test('Einen neuen Kunden mit ungueltigen Daten anlegen: body mit ProblemDetail', () => {
+        const body = response.body;
+        client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
+        const detail = body.detail;
+        client.assert(detail !== null && detail !== undefined && typeof detail === 'string' && detail.length > 2, `body: ${JSON.stringify(body)}`);
+        // noinspection JSObjectNullOrUndefined
+        const detailArr = detail.slice(1, -1).split(', ');
+        client.assert(detailArr.length > 0, `detail: ${JSON.stringify(detail)}`);
+    });
+%}
+
+### Einen neuen Kunden mit fehlerhaften Datentypen anlegen: 400 (Bad Request)
+POST {{restUrl}}
+Content-Type: application/json
+
+< data/kunde-neu-invalid-types.json
+
+> {%
+    client.test('Einen neuen Kunden mit fehlerhaften Datentypen anlegen: Bad Request (400)', () => {
+        const status = response.status;
+        client.assert(status === 400, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('Einen neuen Kunden mit fehlerhaften Datentypen anlegen: body mit ProblemDetail', () => {
+        const body = response.body;
+        client.assert(body !== null && body !== undefined && typeof body === 'object', `body: ${JSON.stringify(body)}`);
+    });
+%}
+
+### Syntaktisch falscher JSON-Datensatz: 400 (Bad Request) mit DecodingException
+POST {{restUrl}}
+Content-Type: application/json
+
+< data/invalid-json.txt
+
+> {%
+    client.test('Syntaktisch falscher JSON-Datensatz: Bad Request (400)', () => {
+        const status = response.status;
+        client.assert(status === 400, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('Syntaktisch falscher JSON-Datensatz: body mit ProblemDetail', () => {
+        const body = response.body;
+        client.assert(body !== null && body !== undefined && typeof body === 'object', `body: ${JSON.stringify(body)}`);
+    });
+%}

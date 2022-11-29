@@ -1,0 +1,147 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licensesR/>.
+
+# Description in Markdown-Syntax
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Suche nach Kundendaten"
+type Query {
+  "Suche Kundendaten anhand der ID"
+  kunde(id: ID!): Kunde
+
+  "Suche Kundendaten anhand des Nachnamens oder der Emailadresse"
+  kunden(input: Suchkriterien): [Kunde!]
+}
+
+type Mutation {
+  "Einen neuen Kundendatensatz anlegen"
+  create(input: KundeInput!): CreatePayload
+}
+
+# https://spec.graphql.org/draft/#sec-Types
+# https://www.graphql-scalars.dev/docs/scalars/email-address
+# https://www.graphql-scalars.dev/docs/scalars/local-date
+"Eigenschaften eines Kunde-Datensatzes mit untergeordneten Eigenschaften"
+type Kunde {
+  "ID des Kunden"
+  id: ID
+  "Nachname des Kunden"
+  nachname: String!
+  email: String!
+  kategorie: Int!
+  hasNewsletter: Boolean!
+  geburtsdatum: String
+  homepage: String
+  geschlecht: String
+  familienstand: String
+  interessen: [String!]
+  umsatz: Umsatz
+  adresse: Adresse!
+}
+
+# https://www.graphql-scalars.dev/docs/scalars/currency
+"Daten zu einem Umsatz"
+type Umsatz {
+  "Der Betrag"
+  betrag: String!
+  "Die Währung"
+  waehrung: String!
+}
+
+type Adresse {
+  "Postleitzahl der Adresse"
+  plz: String!
+  "Ortsangabe"
+  ort: String!
+}
+
+# https://spec.graphql.org/draft/#sec-Input-Objects
+"Suchkriterien für die Query 'kunden'"
+input Suchkriterien {
+  "Nachname der gesuchten Kunden"
+  nachname: String
+  "Emailadresse der gesuchten Kunden"
+  email: String
+}
+
+"Eingabedaten für einen neuen Kunden"
+input KundeInput {
+  "Nachname des neuen Kunden"
+  nachname: String!
+  "Emailadresse des neuen Kunden"
+  email: String!
+  kategorie: Int!
+  "Newsletter-Abo: true / false"
+  hasNewsletter: Boolean!
+  "Geburtsdatum des neuen Kunden"
+  geburtsdatum: String
+  homepage: String
+  "Geschlecht des neuen Kunden: MAENNLICH, WEIBLICH, DIVERS"
+  geschlecht: Geschlecht
+  "Familienstand des neuen Kunden: LEDIG, VERHEIRATET, GESCHIEDEN, VERWITWET"
+  familienstand: Familienstand
+  "InteressEN des neuen Kunden: SPORT, LESEN, REISEN"
+  interessen: [Interesse!]
+  "Umsatzangabe zum neuen Kunden"
+  umsatz: UmsatzInput
+  "Adresse des neuen Kunden"
+  adresse: AdresseInput!
+}
+
+"Aufzählungstyp für das Geschlecht eines Kunden"
+enum Geschlecht {
+  WEIBLICH
+  MAENNLICH
+  DIVERS
+}
+
+"Aufzählungstyp für den Familienstand eines Kunden"
+enum Familienstand {
+  LEDIG
+  VERHEIRATET
+  GESCHIEDEN
+  VERWITWET
+}
+
+"Aufzählungstyp für die Interessen eines Kunden"
+enum Interesse {
+  SPORT
+  LESEN
+  REISEN
+}
+
+"Umsatzeingabe für einen Kunden: Neuanlegen oder Ändern"
+input UmsatzInput {
+  "Betrag"
+  betrag: String!
+  "Währung"
+  waehrung: String!
+}
+
+"Neue oder geänderte Adresse"
+input AdresseInput {
+  plz: String!
+  ort: String!
+}
+
+"Rückgabetyp beim Neuanlegen eines Kunden"
+type CreatePayload {
+  "ID des neu angelegten Kunden"
+  id: String!
+}

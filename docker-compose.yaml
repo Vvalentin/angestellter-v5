@@ -1,0 +1,55 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Aufruf:   docker compose up
+#           docker compose down
+#           docker compose exec kunde bash
+
+# docker run --publish 8080:8080 `
+#   --env TZ=Europe/Berlin --env SPRING_PROFILES_ACTIVE=dev --env REQUEST_RESPONSE_LOGLEVEL=debug --env APPLICATION_LOGLEVEL=trace `
+#   --mount 'type=bind,source=C:\Zimmermann\volumes\kunde-v1,destination=/tmp' `
+#   --hostname kunde --name kunde --rm juergenzimmermann/kunde:1.0.0-dockerfile
+#   ggf. --memory 1024m --cpus 1
+
+# https://github.com/compose-spec/compose-spec/blob/master/spec.md#compose-file
+# https://github.com/compose-spec/compose-spec/blob/master/spec.md#services-top-level-element
+# https://docs.docker.com/compose/compose-file
+# https://docs.docker.com/compose/compose-file/compose-file-v3
+services:
+  kunde:
+    #image: juergenzimmermann/kunde:1.0.0-dockerfile
+    image: juergenzimmermann/kunde:1.0.0
+    ports:
+      - published: 8080
+        target: 8080
+    #working_dir: /application
+    volumes:
+      - type: bind
+        source: C:\Zimmermann\volumes\kunde-v1
+        target: /tmp
+    environment:
+      TZ: Europe/Berlin
+      SPRING_PROFILES_ACTIVE: dev
+      SERVER_TOMCAT_BASEDIR: /tmp
+      REQUEST_RESPONSE_LOGLEVEL: debug
+      APPLICATION_LOGLEVEL: trace
+      JAVA_OPTS: "--enable-preview"
+    container_name: kunde
+    hostname: kunde
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1024M

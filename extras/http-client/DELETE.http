@@ -1,0 +1,15 @@
+### Löschen mit vorhandener Kunde-ID
+DELETE {{restUrl}}/00000000-0000-0000-0000-000000000050
+Authorization: Basic {{userAdmin}} {{password}}
+
+> {%
+    client.test('Löschen mit vorhandener Kunde-ID: No Content (204)', () => {
+        const status = response.status;
+        client.assert(status === 204, `Falscher Statuscode: ${status}`);
+    });
+
+    client.test('Löschen mit vorhandener Kunde-ID: leerer body', () => {
+        const body = response.body;
+        client.assert(body === null, `body: ${JSON.stringify(body)}`);
+    });
+%}

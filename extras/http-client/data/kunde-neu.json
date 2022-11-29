@@ -1,0 +1,22 @@
+{
+    "nachname": "Nachnamerest",
+    "email": "rest@rest.de",
+    "kategorie" : 1,
+    "hasNewsletter": true,
+    "geburtsdatum": "2022-02-01",
+    "umsatz": {
+        "betrag": 200,
+        "waehrung": "EUR"
+    },
+    "homepage": "https://www.rest.de",
+    "geschlecht": "W",
+    "familienstand": "L",
+    "interessen": [
+        "R",
+        "L"
+    ],
+    "adresse": {
+        "plz": "99999",
+        "ort": "Restort"
+    }
+}

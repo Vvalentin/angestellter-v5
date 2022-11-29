@@ -1,0 +1,66 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Aufruf:   docker compose up
+#           docker compose down
+#           docker compose exec grafana bash
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.40.2
+    ports:
+      - published: 9090
+        target: 9090
+    volumes:
+      - type: bind
+        source: C:\Zimmermann\volumes\prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+    environment:
+      TZ: Europe/Berlin
+    container_name: prometheus
+    hostname: prometheus
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1024M
+  grafana:
+    image: grafana/grafana:9.3.0-beta1-ubuntu
+    ports:
+      - published: 3001
+        target: 3000
+    volumes:
+      - type: bind
+        # https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/#package-details
+        source: C:\Zimmermann\volumes\grafana\grafana.db
+        target: /var/lib/grafana/grafana.db
+      - type: bind
+        source: C:\Zimmermann\volumes\grafana\csv
+        target: /var/lib/grafana/csv
+      - type: bind
+        source: C:\Zimmermann\volumes\grafana\plugins
+        target: /var/lib/grafana/plugins
+      - type: bind
+        source: C:\Zimmermann\volumes\grafana\png
+        target: /var/lib/grafana/png
+    environment:
+      TZ: Europe/Berlin
+    container_name: grafana
+    hostname: grafana
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1024M

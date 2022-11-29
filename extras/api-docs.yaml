@@ -1,0 +1,345 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8080
+  description: Generated server url
+paths:
+  /{id}:
+    get:
+      tags:
+      - Suchen
+      - Kunde API
+      summary: Suche mit der Kunde-ID
+      operationId: findById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Kunde gefunden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/KundeModel'
+        "404":
+          description: Kunde nicht gefunden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/KundeModel'
+    put:
+      tags:
+      - Aktualisieren
+      - Kunde API
+      summary: Einen Kunden mit neuen Werten aktualisieren
+      operationId: update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KundeDTO'
+        required: true
+      responses:
+        "422":
+          description: Ungültige Werte oder Email vorhanden
+        "400":
+          description: Syntaktische Fehler im Request-Body
+        "404":
+          description: Kunde nicht vorhanden
+        "204":
+          description: Aktualisiert
+    delete:
+      tags:
+      - Loeschen
+      - Kunde API
+      summary: Einen Kunden anhand der ID loeschen
+      operationId: deleteById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Gelöscht
+    patch:
+      tags:
+      - Aktualisieren
+      - Kunde API
+      summary: Einen Kunden mit einzelnen neuen Werten aktualisieren
+      operationId: patch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PatchOperation'
+        required: true
+      responses:
+        "422":
+          description: Constraints verletzt oder Email vorhanden
+        "400":
+          description: Syntaktische Fehler im Request-Body
+        "404":
+          description: Kunde nicht vorhanden
+        "204":
+          description: Aktualisiert
+  /:
+    get:
+      tags:
+      - Suchen
+      - Kunde API
+      summary: Suche mit Suchkriterien
+      operationId: find
+      parameters:
+      - name: suchkriterien
+        in: query
+        required: true
+        schema:
+          type: object
+          additionalProperties:
+            type: string
+      responses:
+        "404":
+          description: Keine Kunden gefunden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelKundeModel'
+        "200":
+          description: CollectionModel mid den Kunden
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/CollectionModelKundeModel'
+    post:
+      tags:
+      - Neuanlegen
+      - Kunde API
+      summary: Einen neuen Kunden anlegen
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KundeDTO'
+        required: true
+      responses:
+        "422":
+          description: Ungültige Werte oder Email vorhanden
+        "201":
+          description: Kunde neu angelegt
+        "400":
+          description: Syntaktische Fehler im Request-Body
+  /nachname/{prefix}:
+    get:
+      tags:
+      - Kunde API
+      operationId: findNachnamenByPrefix
+      parameters:
+      - name: prefix
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    Adresse:
+      required:
+      - ort
+      - plz
+      type: object
+      properties:
+        plz:
+          pattern: "^\\d{5}$"
+          type: string
+        ort:
+          type: string
+    KundeDTO:
+      type: object
+      properties:
+        nachname:
+          type: string
+        email:
+          type: string
+        kategorie:
+          type: integer
+          format: int32
+        hasNewsletter:
+          type: boolean
+        geburtsdatum:
+          type: string
+          format: date
+        homepage:
+          type: string
+          format: url
+        geschlecht:
+          type: string
+          enum:
+          - M
+          - W
+          - D
+        familienstand:
+          type: string
+          enum:
+          - L
+          - VH
+          - G
+          - VW
+        interessen:
+          type: array
+          items:
+            type: string
+            enum:
+            - S
+            - L
+            - R
+        umsatz:
+          $ref: '#/components/schemas/Umsatz'
+        adresse:
+          $ref: '#/components/schemas/Adresse'
+    Umsatz:
+      type: object
+      properties:
+        betrag:
+          type: number
+        waehrung:
+          type: object
+          properties:
+            currencyCode:
+              type: string
+            defaultFractionDigits:
+              type: integer
+              format: int32
+            numericCode:
+              type: integer
+              format: int32
+            displayName:
+              type: string
+            symbol:
+              type: string
+            numericCodeAsString:
+              type: string
+    PatchOperation:
+      type: object
+      properties:
+        op:
+          type: string
+          enum:
+          - replace
+          - add
+          - remove
+        path:
+          type: string
+        value:
+          type: string
+    KundeModel:
+      type: object
+      properties:
+        nachname:
+          type: string
+        email:
+          type: string
+        kategorie:
+          type: integer
+          format: int32
+        hasNewsletter:
+          type: boolean
+        geburtsdatum:
+          type: string
+          format: date
+        homepage:
+          type: string
+          format: url
+        geschlecht:
+          type: string
+          enum:
+          - M
+          - W
+          - D
+        familienstand:
+          type: string
+          enum:
+          - L
+          - VH
+          - G
+          - VW
+        interessen:
+          type: array
+          items:
+            type: string
+            enum:
+            - S
+            - L
+            - R
+        umsatz:
+          $ref: '#/components/schemas/Umsatz'
+        adresse:
+          $ref: '#/components/schemas/Adresse'
+        _links:
+          $ref: '#/components/schemas/Links'
+    Links:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Link'
+    CollectionModelKundeModel:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            kunden:
+              type: array
+              items:
+                $ref: '#/components/schemas/KundeModel'
+        _links:
+          $ref: '#/components/schemas/Links'
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        hreflang:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        deprecation:
+          type: string
+        profile:
+          type: string
+        name:
+          type: string
+        templated:
+          type: boolean
