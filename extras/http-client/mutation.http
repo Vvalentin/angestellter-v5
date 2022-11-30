@@ -1,4 +1,4 @@
-### Einen neuen Kunden anlegen
+### Einen neuen Angestellten anlegen
 GRAPHQL {{graphqlUrl}}
 
 mutation {
@@ -27,17 +27,17 @@ mutation {
   }
 }
 > {%
-    client.test('Mutation neuer Kunde: OK', () => {
+    client.test('Mutation neuer Angestellter: OK', () => {
         const status = response.status;
         client.assert(status === 200, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Mutation neuer Kunde: application/json', () => {
+    client.test('Mutation neuer Angestellter: application/json', () => {
         const mimeType = response.contentType.mimeType;
         client.assert(mimeType === 'application/json', `Falscher MIME-Typ: ${mimeType}`);
     });
 
-    client.test('Mutation neuer Kunde: body mit Daten', () => {
+    client.test('Mutation neuer Angestellter: body mit Daten', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         // TODO Optional Chaining
@@ -48,7 +48,7 @@ mutation {
     });
 %}
 
-### Einen neuen Kunden mit fehlerhaften Daten anlegen
+### Einen neuen Angestellten mit fehlerhaften Daten anlegen
 GRAPHQL {{graphqlUrl}}
 
 mutation {
@@ -77,17 +77,17 @@ mutation {
   }
 }
 > {%
-    client.test('Mutation neuer Kunde mit fehlerhaften Daten: OK', () => {
+    client.test('Mutation neuer Angestellter mit fehlerhaften Daten: OK', () => {
         const status = response.status;
         client.assert(status === 200, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Mutation neuer Kunde mit fehlerhaften Daten: application/json', () => {
+    client.test('Mutation neuer Angestellter mit fehlerhaften Daten: application/json', () => {
         const mimeType = response.contentType.mimeType;
         client.assert(mimeType === 'application/json', `Falscher MIME-Typ: ${mimeType}`);
     });
 
-    client.test('Mutation neuer Kunde mit fehlerhaften Daten: body mit Errors ohne Daten', () => {
+    client.test('Mutation neuer Angestellter mit fehlerhaften Daten: body mit Errors ohne Daten', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         client.assert(typeof body.data === 'object', `body: ${JSON.stringify(body)}`);

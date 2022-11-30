@@ -18,8 +18,8 @@
 #           helmfile destroy
 
 releases:
-  - name: kunde
+  - name: angestellter
     namespace: acme
-    chart: extras/kunde
-    values: [extras/kunde/dev.yaml]
+    chart: extras/angestellter
+    values: [extras/angestellter/dev.yaml]
     #wait: true

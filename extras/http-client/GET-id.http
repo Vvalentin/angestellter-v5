@@ -1,7 +1,7 @@
 // https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html
 // https://www.jetbrains.com/help/idea/http-response-handling-examples.html#checking-response-headers-body
 
-### Suche mit vorhandener Kunde-ID
+### Suche mit vorhandener Angestellter-ID
 GET {{restUrl}}/00000000-0000-0000-0000-000000000001
 Accept: application/hal+json
 Authorization: Basic {{userAdmin}} {{password}}
@@ -27,17 +27,17 @@ Authorization: Basic {{userAdmin}} {{password}}
     });
 %}
 
-### Suche mit nicht-vorhandener Kunde-ID: 404 (Not Found)
+### Suche mit nicht-vorhandener Angestellter-ID: 404 (Not Found)
 GET {{restUrl}}/ffffffff-ffff-ffff-ffff-ffffffffffff
 Authorization: Basic {{userAdmin}} {{password}}
 
 > {%
-    client.test('GET mit nicht-vorhandener Kunde-ID: Not Found', () => {
+    client.test('GET mit nicht-vorhandener Angestellter-ID: Not Found', () => {
         const status = response.status;
         client.assert(status === 404, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('GET mit nicht-vorhandener Kunde-ID: leerer Body', () => {
+    client.test('GET mit nicht-vorhandener Angestellter-ID: leerer Body', () => {
         const body = response.body;
         client.assert(body === null, `body: ${JSON.stringify(body)}`);
     });

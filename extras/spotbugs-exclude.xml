@@ -7,16 +7,16 @@
         <Bug pattern="EI_EXPOSE_REP2"/>
     </Match>
     <Match>
-        <Class name="com.acme.kunde.entity.Kunde_" />
+        <Class name="com.acme.angestellter.entity.Angestellter_" />
     </Match>
     <Match>
-        <Class name="com.acme.kunde.entity.Adresse_" />
+        <Class name="com.acme.angestellter.entity.Adresse_" />
     </Match>
     <Match>
-        <Class name="com.acme.kunde.entity.Umsatz_" />
+        <Class name="com.acme.angestellter.entity.Umsatz_" />
     </Match>
     <Match>
-        <Class name="com.acme.kunde.security.Login_" />
+        <Class name="com.acme.angestellter.security.Login_" />
     </Match>
     <Match>
         <Class name="com.acme.bestellung.entity.Bestellung_" />

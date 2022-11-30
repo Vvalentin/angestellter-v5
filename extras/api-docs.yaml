@@ -10,8 +10,8 @@ paths:
     get:
       tags:
       - Suchen
-      - Kunde API
-      summary: Suche mit der Kunde-ID
+      - Angestellter API
+      summary: Suche mit der Angestellter-ID
       operationId: findById
       parameters:
       - name: id
@@ -22,22 +22,22 @@ paths:
           format: uuid
       responses:
         "200":
-          description: Kunde gefunden
+          description: Angestellter gefunden
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/KundeModel'
+                $ref: '#/components/schemas/AngestellterModel'
         "404":
-          description: Kunde nicht gefunden
+          description: Angestellter nicht gefunden
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/KundeModel'
+                $ref: '#/components/schemas/AngestellterModel'
     put:
       tags:
       - Aktualisieren
-      - Kunde API
-      summary: Einen Kunden mit neuen Werten aktualisieren
+      - Angestellter API
+      summary: Einen Angestellten mit neuen Werten aktualisieren
       operationId: update
       parameters:
       - name: id
@@ -50,7 +50,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KundeDTO'
+              $ref: '#/components/schemas/AngestellterDTO'
         required: true
       responses:
         "422":
@@ -58,14 +58,14 @@ paths:
         "400":
           description: Syntaktische Fehler im Request-Body
         "404":
-          description: Kunde nicht vorhanden
+          description: Angestellter nicht vorhanden
         "204":
           description: Aktualisiert
     delete:
       tags:
       - Loeschen
-      - Kunde API
-      summary: Einen Kunden anhand der ID loeschen
+      - Angestellter API
+      summary: Einen Angestellten anhand der ID loeschen
       operationId: deleteById
       parameters:
       - name: id
@@ -80,8 +80,8 @@ paths:
     patch:
       tags:
       - Aktualisieren
-      - Kunde API
-      summary: Einen Kunden mit einzelnen neuen Werten aktualisieren
+      - Angestellter API
+      summary: Einen Angestellten mit einzelnen neuen Werten aktualisieren
       operationId: patch
       parameters:
       - name: id
@@ -104,14 +104,14 @@ paths:
         "400":
           description: Syntaktische Fehler im Request-Body
         "404":
-          description: Kunde nicht vorhanden
+          description: Angestellter nicht vorhanden
         "204":
           description: Aktualisiert
   /:
     get:
       tags:
       - Suchen
-      - Kunde API
+      - Angestellter API
       summary: Suche mit Suchkriterien
       operationId: find
       parameters:
@@ -124,40 +124,40 @@ paths:
             type: string
       responses:
         "404":
-          description: Keine Kunden gefunden
+          description: Keine Angestellten gefunden
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CollectionModelKundeModel'
+                $ref: '#/components/schemas/CollectionModelAngestellterModel'
         "200":
-          description: CollectionModel mid den Kunden
+          description: CollectionModel mid den Angestellten
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/CollectionModelKundeModel'
+                $ref: '#/components/schemas/CollectionModelAngestellterModel'
     post:
       tags:
       - Neuanlegen
-      - Kunde API
-      summary: Einen neuen Kunden anlegen
+      - Angestellter API
+      summary: Einen neuen Angestellten anlegen
       operationId: create
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/KundeDTO'
+              $ref: '#/components/schemas/AngestellterDTO'
         required: true
       responses:
         "422":
           description: Ungültige Werte oder Email vorhanden
         "201":
-          description: Kunde neu angelegt
+          description: Angestellter neu angelegt
         "400":
           description: Syntaktische Fehler im Request-Body
   /nachname/{prefix}:
     get:
       tags:
-      - Kunde API
+      - Angestellter API
       operationId: findNachnamenByPrefix
       parameters:
       - name: prefix
@@ -185,7 +185,7 @@ components:
           type: string
         ort:
           type: string
-    KundeDTO:
+    AngestellterDTO:
       type: object
       properties:
         nachname:
@@ -263,7 +263,7 @@ components:
           type: string
         value:
           type: string
-    KundeModel:
+    AngestellterModel:
       type: object
       properties:
         nachname:
@@ -312,16 +312,16 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/Link'
-    CollectionModelKundeModel:
+    CollectionModelAngestellterModel:
       type: object
       properties:
         _embedded:
           type: object
           properties:
-            kunden:
+            angestellte:
               type: array
               items:
-                $ref: '#/components/schemas/KundeModel'
+                $ref: '#/components/schemas/AngestellterModel'
         _links:
           $ref: '#/components/schemas/Links'
     Link:

@@ -1,60 +1,60 @@
-### Einen Kunden mittels PUT aktualisieren
+### Einen Angestellten mittels PUT aktualisieren
 PUT {{restUrl}}/00000000-0000-0000-0000-000000000030
 Content-Type: application/json
 Authorization: Basic {{userAdmin}} {{password}}
 
-< data/kunde-30-put.json
+< data/angestellter-30-put.json
 
 > {%
-    client.test('Einen Kunden mittels PUT aktualisieren: No Content (204)', () => {
+    client.test('Einen Angestellten mittels PUT aktualisieren: No Content (204)', () => {
         const status = response.status;
         client.assert(status === 204, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Einen Kunden mittels PUT aktualisieren: leerer body', () => {
+    client.test('Einen Angestellten mittels PUT aktualisieren: leerer body', () => {
         const body = response.body;
         client.assert(body === null, `body: ${JSON.stringify(body)}`);
     });
 %}
 
-### Einen nicht-vorhandenen Kunden mittels PUT aktualisieren: 404 (Not Found)
+### Einen nicht-vorhandenen Angestellten mittels PUT aktualisieren: 404 (Not Found)
 PUT {{restUrl}}/ffffffff-ffff-ffff-ffff-ffffffffffff
 Content-Type: application/json
 Authorization: Basic {{userAdmin}} {{password}}
 
-< data/kunde-30-put.json
+< data/angestellter-30-put.json
 
 > {%
-    client.test('Einen Kunden mittels PUT aktualisieren: Not Found (404)', () => {
+    client.test('Einen Angestellten mittels PUT aktualisieren: Not Found (404)', () => {
         const status = response.status;
         client.assert(status === 404, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Einen Kunden mittels PUT aktualisieren: leerer body', () => {
+    client.test('Einen Angestellten mittels PUT aktualisieren: leerer body', () => {
         const body = response.body;
         client.assert(body === null, `body: ${JSON.stringify(body)}`);
     });
 %}
 
-### Einen Kunden mittels PUT aktualisieren und Email existiert: 422 (Unprocessable Entity)
+### Einen Angestellten mittels PUT aktualisieren und Email existiert: 422 (Unprocessable Entity)
 PUT {{restUrl}}/00000000-0000-0000-0000-000000000030
 Content-Type: application/json
 Authorization: Basic {{userAdmin}} {{password}}
 
-< data/kunde-30-put-email-exists.json
+< data/angestellter-30-put-email-exists.json
 
 > {%
-    client.test('Einen Kunden mittels PUT aktualisieren und Email existiert: Unprocessable Entity (422)', () => {
+    client.test('Einen Angestellten mittels PUT aktualisieren und Email existiert: Unprocessable Entity (422)', () => {
         const status = response.status;
         client.assert(status === 422, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Einen Kunden mittels PUT aktualisieren und Email existiert: application/problem+json', () => {
+    client.test('Einen Angestellten mittels PUT aktualisieren und Email existiert: application/problem+json', () => {
         const mimeType = response.contentType.mimeType;
         client.assert(mimeType === "application/problem+json", `Falscher MIME-Typ: ${mimeType}`);
     });
 
-    client.test('Einen Kunden mittels PUT aktualisieren und Email existiert: body mit ProblemDetail', () => {
+    client.test('Einen Angestellten mittels PUT aktualisieren und Email existiert: body mit ProblemDetail', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         const detail = body.detail;
@@ -63,25 +63,25 @@ Authorization: Basic {{userAdmin}} {{password}}
     });
 %}
 
-### Einen Kunden mittels PUT und ungueltigen Daten aktualisieren: 422 (Unprocessable Entity)
+### Einen Angestellten mittels PUT und ungueltigen Daten aktualisieren: 422 (Unprocessable Entity)
 PUT {{restUrl}}/00000000-0000-0000-0000-000000000030
 Content-Type: application/json
 Authorization: Basic {{userAdmin}} {{password}}
 
-< data/kunde-30-put-invalid.json
+< data/angestellter-30-put-invalid.json
 
 > {%
-    client.test('Einen Kunden mittels PUT und ungueltigen Daten aktualisieren: Unprocessable Entity (422)', () => {
+    client.test('Einen Angestellten mittels PUT und ungueltigen Daten aktualisieren: Unprocessable Entity (422)', () => {
         const status = response.status;
         client.assert(status === 422, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Einen Kunden mittels PUT und ungueltigen Daten aktualisieren: application/problem+json', () => {
+    client.test('Einen Angestellten mittels PUT und ungueltigen Daten aktualisieren: application/problem+json', () => {
         const mimeType = response.contentType.mimeType;
         client.assert(mimeType === "application/problem+json", `Falscher MIME-Typ: ${mimeType}`);
     });
 
-    client.test('Einen Kunden mittels PUT und ungueltigen Daten aktualisieren: body mit ProblemDetail', () => {
+    client.test('Einen Angestellten mittels PUT und ungueltigen Daten aktualisieren: body mit ProblemDetail', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         const detail = body.detail;

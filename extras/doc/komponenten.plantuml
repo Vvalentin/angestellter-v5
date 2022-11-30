@@ -16,25 +16,25 @@
 
 left to right direction
 
-package com.acme.kunde #DDDDDD {
+package com.acme.angestellter #DDDDDD {
     package rest <<boundary>> #FFFFFF {
-        [@RestController\nKundeReadController] as KundeReadController
+        [@RestController\nAngestellterReadController] as AngestellterReadController
     }
 
     package service <<control>> #FFFFFF {
-        [@Service\nKundeReadService] as KundeReadService
+        [@Service\nAngestellterReadService] as AngestellterReadService
     }
 
     package entity <<entity>> #FFFFFF {
-        [Kunde]
+        [Angestellter]
     }
 }
 
-RESTClient ~~> [KundeReadController]
+RESTClient ~~> [AngestellterReadController]
 
-[KundeReadController] o--> [KundeReadService]
-[KundeReadController] .up.> [Kunde]
-[KundeReadService] ..> [Kunde]
+[AngestellterReadController] o--> [AngestellterReadService]
+[AngestellterReadController] .up.> [Angestellter]
+[AngestellterReadService] ..> [Angestellter]
 
 footer (c) Jürgen Zimmermann
 

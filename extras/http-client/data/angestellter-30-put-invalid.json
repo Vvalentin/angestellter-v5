@@ -1,0 +1,11 @@
+{
+    "nachname": "?!:",
+    "email": "email",
+    "geburtsdatum": "3000-01-01",
+    "geschlecht": "W",
+    "familienstand": "L",
+    "adresse": {
+        "plz": "1",
+        "ort": "Testort"
+    }
+}

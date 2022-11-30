@@ -20,28 +20,28 @@ schema {
   mutation: Mutation
 }
 
-"Suche nach Kundendaten"
+"Suche nach Angestelltendaten"
 type Query {
-  "Suche Kundendaten anhand der ID"
-  kunde(id: ID!): Kunde
+  "Suche Angestelltendaten anhand der ID"
+  angestellter(id: ID!): Angestellter
 
-  "Suche Kundendaten anhand des Nachnamens oder der Emailadresse"
-  kunden(input: Suchkriterien): [Kunde!]
+  "Suche Angestelltendaten anhand des Nachnamens oder der Emailadresse"
+  angestellte(input: Suchkriterien): [Angestellter!]
 }
 
 type Mutation {
-  "Einen neuen Kundendatensatz anlegen"
-  create(input: KundeInput!): CreatePayload
+  "Einen neuen Angestelltendatensatz anlegen"
+  create(input: AngestellterInput!): CreatePayload
 }
 
 # https://spec.graphql.org/draft/#sec-Types
 # https://www.graphql-scalars.dev/docs/scalars/email-address
 # https://www.graphql-scalars.dev/docs/scalars/local-date
-"Eigenschaften eines Kunde-Datensatzes mit untergeordneten Eigenschaften"
-type Kunde {
-  "ID des Kunden"
+"Eigenschaften eines Angestellter-Datensatzes mit untergeordneten Eigenschaften"
+type Angestellter {
+  "ID des Angestellten"
   id: ID
-  "Nachname des Kunden"
+  "Nachname des Angestellten"
   nachname: String!
   email: String!
   kategorie: Int!
@@ -72,46 +72,46 @@ type Adresse {
 }
 
 # https://spec.graphql.org/draft/#sec-Input-Objects
-"Suchkriterien für die Query 'kunden'"
+"Suchkriterien für die Query 'angestellte'"
 input Suchkriterien {
-  "Nachname der gesuchten Kunden"
+  "Nachname der gesuchten Angestellten"
   nachname: String
-  "Emailadresse der gesuchten Kunden"
+  "Emailadresse der gesuchten Angestellten"
   email: String
 }
 
-"Eingabedaten für einen neuen Kunden"
-input KundeInput {
-  "Nachname des neuen Kunden"
+"Eingabedaten für einen neuen Angestellten"
+input AngestellterInput {
+  "Nachname des neuen Angestellten"
   nachname: String!
-  "Emailadresse des neuen Kunden"
+  "Emailadresse des neuen Angestellten"
   email: String!
   kategorie: Int!
   "Newsletter-Abo: true / false"
   hasNewsletter: Boolean!
-  "Geburtsdatum des neuen Kunden"
+  "Geburtsdatum des neuen Angestellten"
   geburtsdatum: String
   homepage: String
-  "Geschlecht des neuen Kunden: MAENNLICH, WEIBLICH, DIVERS"
+  "Geschlecht des neuen Angestellten: MAENNLICH, WEIBLICH, DIVERS"
   geschlecht: Geschlecht
-  "Familienstand des neuen Kunden: LEDIG, VERHEIRATET, GESCHIEDEN, VERWITWET"
+  "Familienstand des neuen Angestellten: LEDIG, VERHEIRATET, GESCHIEDEN, VERWITWET"
   familienstand: Familienstand
-  "InteressEN des neuen Kunden: SPORT, LESEN, REISEN"
+  "InteressEN des neuen Angestellten: SPORT, LESEN, REISEN"
   interessen: [Interesse!]
-  "Umsatzangabe zum neuen Kunden"
+  "Umsatzangabe zum neuen Angestellten"
   umsatz: UmsatzInput
-  "Adresse des neuen Kunden"
+  "Adresse des neuen Angestellten"
   adresse: AdresseInput!
 }
 
-"Aufzählungstyp für das Geschlecht eines Kunden"
+"Aufzählungstyp für das Geschlecht eines Angestellten"
 enum Geschlecht {
   WEIBLICH
   MAENNLICH
   DIVERS
 }
 
-"Aufzählungstyp für den Familienstand eines Kunden"
+"Aufzählungstyp für den Familienstand eines Angestellten"
 enum Familienstand {
   LEDIG
   VERHEIRATET
@@ -119,14 +119,14 @@ enum Familienstand {
   VERWITWET
 }
 
-"Aufzählungstyp für die Interessen eines Kunden"
+"Aufzählungstyp für die Interessen eines Angestellten"
 enum Interesse {
   SPORT
   LESEN
   REISEN
 }
 
-"Umsatzeingabe für einen Kunden: Neuanlegen oder Ändern"
+"Umsatzeingabe für einen Angestellten: Neuanlegen oder Ändern"
 input UmsatzInput {
   "Betrag"
   betrag: String!
@@ -140,8 +140,8 @@ input AdresseInput {
   ort: String!
 }
 
-"Rückgabetyp beim Neuanlegen eines Kunden"
+"Rückgabetyp beim Neuanlegen eines Angestellten"
 type CreatePayload {
-  "ID des neu angelegten Kunden"
+  "ID des neu angelegten Angestellten"
   id: String!
 }

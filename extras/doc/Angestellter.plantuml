@@ -1,0 +1,85 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml Angestellter
+
+skinparam classAttributeIconSize 0
+' skinparam monochrome true
+
+package java {
+    package util {
+        class UUID
+        interface List<T>
+        class URL
+        class Currency
+    }
+
+    package math {
+        class BigDecimal
+    }
+
+    package time {
+        class LocalDate
+    }
+
+    BigDecimal .up[hidden].> UUID
+    UUID .[hidden].> LocalDate
+}
+
+package com.acme.angestellter.entity #DDDDDD {
+
+    class Adresse {
+        plz: String
+        ort: String
+    }
+
+    enum GeschlechtType {
+        MAENNLICH
+        WEIBLICH
+        DIVERS
+    }
+
+    enum FamilienstandType {
+        LEDIG
+        VERHEIRATET
+        GESCHIEDEN
+        VERWITWET
+    }
+
+    class Angestellter << entity >> {
+        id : UUID
+        nachname : String
+        email : String
+        geburtsdatum: LocalDate
+        geschlecht: GeschlechtType
+        familienstand: FamilienstandType
+    }
+
+    Angestellter *--> "1" Adresse : adresse
+    Angestellter .down.> GeschlechtType
+    Angestellter .down.> FamilienstandType
+    Angestellter .down.> InteresseType
+
+    Angestellter ..> UUID
+    Angestellter ..> LocalDate
+    Angestellter ..> List
+    Angestellter ..> URL
+
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

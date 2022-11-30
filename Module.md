@@ -1,3 +1,3 @@
-# Module Kunde
+# Module Angestellter
 
-Das ist die API-Dokumentation zum Microservice _kunde_.
+Das ist die API-Dokumentation zum Microservice _angestellter_.

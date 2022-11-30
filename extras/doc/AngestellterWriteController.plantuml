@@ -1,0 +1,97 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml AngestellterWriteController
+
+skinparam classAttributeIconSize 0
+
+package org.springframework {
+    package web.bind.annotation {
+        interface "@PathVariable" as PathVariable
+        interface "@RequestBody" as RequestBody
+        interface "@ExceptionHandler" as ExceptionHandler
+    }
+
+    package http {
+        class ResponseEntity<T>
+        class ProblemDetail
+
+        package converter {
+            class HttpMessageNotReadableException
+        }
+
+    }
+}
+
+package jakarta.servlet.http {
+    interface HttpServletRequest
+}
+
+package java.util {
+    interface Collection<T>
+    class UUID
+}
+
+package com.acme.angestellter {
+    package service {
+        class AngestellterWriteService << control >> << @Service >>
+
+        class ConstraintViolationsException
+        class EmailExistsException
+    }
+
+    package rest #DDDDDD {
+        package patch {
+            class PatchOperation <<entity>>
+        }
+
+        class AngestellterDTO <<entity>>
+
+        class AngestellterWriteController << boundary >> << @RestController >> << @RequestMapping >> {
+            + @PostMapping create(@RequestBody AngestellterDTO: AngestellterDTO, request: HttpServletRequest): ResponseEntity<Void>
+            + @PutMapping update(@PathVariable id: UUID, @RequestBody AngestellterDTO: AngestellterDTO)
+            + @PatchMapping patch(@PathVariable id: UUID, @RequestBody patchOps: Collection<PatchOperation>)
+            + @DeleteMapping deleteById(@PathVariable id: UUID)
+            + @ExceptionHandler onConstraintViolations(ex: ConstraintViolationsException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onEmailExists(ex: EmailExistsException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onMessageNotReadable(ex: HttpMessageNotReadableException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+        }
+
+        AngestellterWriteController o-down-> "1" AngestellterWriteService : service
+        AngestellterWriteController ..> AngestellterDTO
+        AngestellterWriteController ..> ConstraintViolationsException
+        AngestellterWriteController ..> EmailExistsException
+        AngestellterWriteController ..> HttpMessageNotReadableException
+        AngestellterWriteController ..> ProblemDetail
+        AngestellterWriteController ..> PatchOperation
+
+        AngestellterWriteController .up.> ResponseEntity
+        AngestellterWriteController .up.> HttpServletRequest
+
+        AngestellterWriteController .up.> PathVariable
+        AngestellterWriteController .up.> RequestBody
+        AngestellterWriteController .up.> ExceptionHandler
+
+        AngestellterWriteController .up.> UUID
+        AngestellterWriteController .up.> Collection
+
+        PatchOperation .[hidden].> AngestellterWriteService
+    }
+}
+
+hide empty members
+
+footer (c) Juergen Zimmermann
+
+@enduml

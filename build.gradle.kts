@@ -486,7 +486,7 @@ tasks.named<BootRun>("bootRun") {
     val db = System.getProperty("db")
     if (db == "mysql" || db == "oracle") {
         val dbUrl = when (db) {
-            "mysql" -> "jdbc:mysql://localhost/kunde"
+            "mysql" -> "jdbc:mysql://localhost/angestellter"
             "oracle" -> "jdbc:oracle:thin:@localhost/XEPDB1"
             else -> throw IllegalStateException("Fehler bei der Gradle-Option -Ddb=mysql oder -Ddb=oracle")
         }
@@ -541,7 +541,7 @@ tasks.test {
     val db = System.getProperty("db")
     if (db == "mysql" || db == "oracle") {
         val dbUrl = when (db) {
-            "mysql" -> "jdbc:mysql://localhost/kunde"
+            "mysql" -> "jdbc:mysql://localhost/angestellter"
             "oracle" -> "jdbc:oracle:thin:@localhost/XEPDB1"
             else -> throw IllegalStateException("Fehler bei der Gradle-Option -Ddb=mysql oder -Ddb=oracle")
         }

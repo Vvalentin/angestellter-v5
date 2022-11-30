@@ -33,13 +33,13 @@ IMPORTANT: Copyright (C) 2015 - present Jürgen Zimmermann, Hochschule Karlsruhe
            GNU General Public License (GPL) v3. +
            For the full text of the license, see the http://www.gnu.org/licenses/gpl-3.0.html[license] file.
 
-== Der Microservice Kunde
+== Der Microservice Angestellter
 
 === Der Microservice im Überblick
 
 bla bla
 
-.Use Cases für den Microservice "kunde"
+.Use Cases für den Microservice "angestellter"
 [plantuml,use-cases,svg]
 ----
 include::./use-cases.plantuml[]
@@ -47,7 +47,7 @@ include::./use-cases.plantuml[]
 
 bla bla
 
-.Komponenten des Microservice "kunde"
+.Komponenten des Microservice "angestellter"
 [plantuml,komponenten,svg]
 ----
 include::./komponenten.plantuml[]
@@ -57,50 +57,50 @@ include::./komponenten.plantuml[]
 
 bla bla
 
-."KundeGetController" für Lesezugriffe an der REST-Schnittstelle
-[plantuml,KundeGetController,svg]
+."AngestellterGetController" für Lesezugriffe an der REST-Schnittstelle
+[plantuml,AngestellterGetController,svg]
 ----
-include::./KundeGetController.plantuml[]
-----
-
-.Die Klasse "KundeModel" für den Datenaustausch bei GET
-[plantuml,KundeModel,svg]
-----
-include::./KundeModel.plantuml[]
+include::./AngestellterGetController.plantuml[]
 ----
 
-."KundeWriteController" für Schreibzugriffe an der REST-Schnittstelle
-[plantuml,KundeWriteController,svg]
+.Die Klasse "AngestellterModel" für den Datenaustausch bei GET
+[plantuml,AngestellterModel,svg]
 ----
-include::./KundeWriteController.plantuml[]
+include::./AngestellterModel.plantuml[]
+----
+
+."AngestellterWriteController" für Schreibzugriffe an der REST-Schnittstelle
+[plantuml,AngestellterWriteController,svg]
+----
+include::./AngestellterWriteController.plantuml[]
 ----
 
 === Der Anwendungskern
 
 bla bla
 
-.Die Service-Klasse "KundeReadService" im Anwendungskern
-[plantuml,KundeReadService,svg]
+.Die Service-Klasse "AngestellterReadService" im Anwendungskern
+[plantuml,AngestellterReadService,svg]
 ----
-include::./KundeReadService.plantuml[]
+include::./AngestellterReadService.plantuml[]
 ----
 
 bla bla
 
-.Die Service-Klasse "KundeWriteService" im Anwendungskern
-[plantuml,KundeWriteService,svg]
+.Die Service-Klasse "AngestellterWriteService" im Anwendungskern
+[plantuml,AngestellterWriteService,svg]
 ----
-include::./KundeWriteService.plantuml[]
+include::./AngestellterWriteService.plantuml[]
 ----
 
 === Die Entity-Klassen
 
 bla bla
 
-.Die Entity-Klasse "Kunde" für Kundendaten
-[plantuml,Kunde,svg]
+.Die Entity-Klasse "Angestellter" für Angestelltendaten
+[plantuml,Angestellter,svg]
 ----
-include::./Kunde.plantuml[]
+include::./Angestellter.plantuml[]
 ----
 
 == Programmierrichtlinien

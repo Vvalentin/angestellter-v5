@@ -1,0 +1,48 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml AngestellterWriteService
+
+skinparam classAttributeIconSize 0
+
+package com.acme.angestellter {
+    package java.util {
+        class UUID
+    }
+    package entity {
+        class Angestellter << entity >>
+    }
+
+    package repository {
+        class AngestellterRepository << control >> << @Repository >>
+    }
+
+    package service #DDDDDD {
+        class AngestellterWriteService << control >> << @Service >> {
+            + create(angestellter: Angestellter): Angestellter
+            + update(angestellter: Angestellter, id: UUID)
+            + deleteById(id: UUID)
+        }
+
+        AngestellterWriteService o--> "1" AngestellterRepository : repo
+        AngestellterWriteService ..> Angestellter
+        AngestellterWriteService ..> UUID
+    }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

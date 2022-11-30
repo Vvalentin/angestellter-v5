@@ -1,4 +1,4 @@
-### Einen Kunden mittels PATCH aktualisieren
+### Einen Angestellten mittels PATCH aktualisieren
 PATCH {{restUrl}}/00000000-0000-0000-0000-000000000040
 Content-Type: application/json
 Authorization: Basic {{userAdmin}} {{password}}
@@ -11,18 +11,18 @@ Authorization: Basic {{userAdmin}} {{password}}
 ]
 
 > {%
-    client.test('Einen Kunden mittels PATCH aktualisieren: No Content (204)', () => {
+    client.test('Einen Angestellten mittels PATCH aktualisieren: No Content (204)', () => {
         const status = response.status;
         client.assert(status === 204, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Einen Kunden mittels PATCH aktualisieren: leerer body', () => {
+    client.test('Einen Angestellten mittels PATCH aktualisieren: leerer body', () => {
         const body = response.body;
         client.assert(body === null, `body: ${JSON.stringify(body)}`);
     });
 %}
 
-### Einen Kunden mit fehlerhaften Daten mittels PATCH aktualisieren
+### Einen Angestellten mit fehlerhaften Daten mittels PATCH aktualisieren
 PATCH {{restUrl}}/00000000-0000-0000-0000-000000000040
 Content-Type: application/json
 Authorization: Basic {{userAdmin}} {{password}}
@@ -33,17 +33,17 @@ Authorization: Basic {{userAdmin}} {{password}}
 ]
 
 > {%
-    client.test('Einen Kunden mittels PATCH und fehlerhaften Daten aktualisieren: Unprocessable Entity (422)', () => {
+    client.test('Einen Angestellten mittels PATCH und fehlerhaften Daten aktualisieren: Unprocessable Entity (422)', () => {
         const status = response.status;
         client.assert(status === 422, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Einen Kunden mittels PATCH und fehlerhaften Daten aktualisieren: application/problem+json', () => {
+    client.test('Einen Angestellten mittels PATCH und fehlerhaften Daten aktualisieren: application/problem+json', () => {
         const mimeType = response.contentType.mimeType;
         client.assert(mimeType === "application/problem+json", `Falscher MIME-Typ: ${mimeType}`);
     });
 
-    client.test('Einen Kunden mittels PATCH und fehlerhaften Daten aktualisieren: body mit ProblemDetail', () => {
+    client.test('Einen Angestellten mittels PATCH und fehlerhaften Daten aktualisieren: body mit ProblemDetail', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         const detail = body.detail;
@@ -54,7 +54,7 @@ Authorization: Basic {{userAdmin}} {{password}}
     });
 %}
 
-### Einen Kunden mit fehlerhaften Interessen mittels PATCH aktualisieren: 422 (Bad Request)
+### Einen Angestellten mit fehlerhaften Interessen mittels PATCH aktualisieren: 422 (Bad Request)
 PATCH {{restUrl}}/00000000-0000-0000-0000-000000000040
 Content-Type: application/json
 Authorization: Basic {{userAdmin}} {{password}}
@@ -67,12 +67,12 @@ Authorization: Basic {{userAdmin}} {{password}}
 ]
 
 > {%
-    client.test('Einen Kunden mit fehlerhaften Interessen mittels PATCH aktualisieren: Bad Request (400)', () => {
+    client.test('Einen Angestellten mit fehlerhaften Interessen mittels PATCH aktualisieren: Bad Request (400)', () => {
         const status = response.status;
         client.assert(status === 400, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Einen Kunden mit fehlerhaften Interessen mittels PATCH aktualisieren: body mit ProblemDetail', () => {
+    client.test('Einen Angestellten mit fehlerhaften Interessen mittels PATCH aktualisieren: body mit ProblemDetail', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
          const detail = body.detail;

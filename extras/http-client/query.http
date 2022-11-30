@@ -1,9 +1,9 @@
-### Suche mit vorhandener Kunde-ID als admin
+### Suche mit vorhandener Angestellter-ID als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunde(id: "00000000-0000-0000-0000-000000000001") {
+  angestellter(id: "00000000-0000-0000-0000-000000000001") {
     nachname
   }
 }
@@ -22,17 +22,17 @@ Authorization: Basic {{userAdmin}} {{password}}
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         // TODO Optional Chaining
-        const kunde = body.data.kunde;
-        client.assert(typeof kunde.nachname === 'string', `kunde: ${JSON.stringify(body.data.kunde)}`);
+        const angestellter = body.data.angestellter;
+        client.assert(typeof angestellter.nachname === 'string', `angestellter: ${JSON.stringify(body.data.angestellter)}`);
     });
 %}
 
-### Suche mit nicht-vorhandener Kunde-ID als admin
+### Suche mit nicht-vorhandener Angestellter-ID als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunde(id: "ffffffff-ffff-ffff-ffff-ffffffffffff") {
+  angestellter(id: "ffffffff-ffff-ffff-ffff-ffffffffffff") {
     nachname
   }
 }
@@ -61,25 +61,17 @@ Authorization: Basic {{userAdmin}} {{password}}
     });
 %}
 
-### Suche mit vorhandener Kunde-ID als admin
+### Suche mit vorhandener Angestellter-ID als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunde(id: "00000000-0000-0000-0000-000000000001") {
+  angestellter(id: "00000000-0000-0000-0000-000000000001") {
     nachname
     email
-    kategorie
-    hasNewsletter
     geburtsdatum
-    homepage
     geschlecht
     familienstand
-    interessen
-    umsatz {
-      betrag
-      waehrung
-    }
     adresse {
       plz
       ort
@@ -101,19 +93,19 @@ Authorization: Basic {{userAdmin}} {{password}}
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         // TODO Optional Chaining
-        const kunde = body.data.kunde;
-        client.assert(typeof kunde.nachname === 'string', `kunde: ${JSON.stringify(body.data.kunde)}`);
-        client.assert(typeof kunde.email === 'string', `kunde: ${JSON.stringify(body.data.kunde)}`);
+        const angestellter = body.data.angestellter;
+        client.assert(typeof angestellter.nachname === 'string', `angestellter: ${JSON.stringify(body.data.angestellter)}`);
+        client.assert(typeof angestellter.email === 'string', `angestellter: ${JSON.stringify(body.data.angestellter)}`);
     });
 %}
 
 
-### Suche alle Kunden als admin
+### Suche alle Angestellten als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunden {
+  angestellte {
     id
     nachname
     kategorie
@@ -134,32 +126,32 @@ Authorization: Basic {{userAdmin}} {{password}}
   }
 }
 > {%
-    client.test('Query alle Kunden als admin: OK', () => {
+    client.test('Query alle Angestellten als admin: OK', () => {
         const status = response.status;
         client.assert(status === 200, `Falscher Statuscode: ${status}`);
     });
 
-    client.test('Query alle Kunden als admin: application/json', () => {
+    client.test('Query alle Angestellten als admin: application/json', () => {
         const mimeType = response.contentType.mimeType;
         client.assert(mimeType === 'application/json', `Falscher MIME-Typ: ${mimeType}`);
     });
 
-    client.test('Query alle Kunden als admin: body mit Daten', () => {
+    client.test('Query alle Angestellten als admin: body mit Daten', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         // TODO Optional Chaining
-        const kunden = body.data.kunden;
-        client.assert(Array.isArray(kunden) === true, `data: ${JSON.stringify(body.data)}`);
-        client.assert(kunden.length > 0, `data: ${JSON.stringify(body.data)}`);
+        const angestellte = body.data.angestellte;
+        client.assert(Array.isArray(angestellte) === true, `data: ${JSON.stringify(body.data)}`);
+        client.assert(angestellte.length > 0, `data: ${JSON.stringify(body.data)}`);
     });
 %}
 
-### Suche Kunde mit der Emailadresse als admin
+### Suche Angestellter mit der Emailadresse als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunden(input: {email: "admin@acme.com"}) {
+  angestellte(input: {email: "admin@acme.com"}) {
     id
     nachname
     kategorie
@@ -194,20 +186,20 @@ Authorization: Basic {{userAdmin}} {{password}}
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         // TODO Optional Chaining
-        const kunden = body.data.kunden;
-        client.assert(Array.isArray(kunden) === true, `data: ${JSON.stringify(body.data)}`);
-        client.assert(kunden.length === 1, `data: ${JSON.stringify(body.data)}`);
-        const kunde = kunden[0];
-        client.assert(typeof kunde.nachname === 'string', `kunde: ${JSON.stringify(kunde)}`);
+        const angestellte = body.data.angestellte;
+        client.assert(Array.isArray(angestellte) === true, `data: ${JSON.stringify(body.data)}`);
+        client.assert(angestellte.length === 1, `data: ${JSON.stringify(body.data)}`);
+        const angestellter = angestellte[0];
+        client.assert(typeof angestellter.nachname === 'string', `angestellter: ${JSON.stringify(angestellter)}`);
     });
 %}
 
-### Suche Kunde mit nicht-vorhandener Emailadresse als admin
+### Suche Angestellter mit nicht-vorhandener Emailadresse als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunden(input: {email: "nicht.vorhanden@acme.com"}) {
+  angestellte(input: {email: "nicht.vorhanden@acme.com"}) {
     id
   }
 }
@@ -236,12 +228,12 @@ Authorization: Basic {{userAdmin}} {{password}}
     });
 %}
 
-### Suche Kunden mit dem Nachnamen als admin
+### Suche Angestellten mit dem Nachnamen als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunden(input: {nachname: "a"}) {
+  angestellte(input: {nachname: "a"}) {
     id
     nachname
     email
@@ -277,20 +269,20 @@ Authorization: Basic {{userAdmin}} {{password}}
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         // TODO Optional Chaining
-        const kunden = body.data.kunden;
-        client.assert(Array.isArray(kunden) === true, `data: ${JSON.stringify(body.data)}`);
-        client.assert(kunden.length > 0, `data: ${JSON.stringify(body.data)}`);
-        kunden.map(kunde => kunde.nachname)
+        const angestellte = body.data.angestellte;
+        client.assert(Array.isArray(angestellte) === true, `data: ${JSON.stringify(body.data)}`);
+        client.assert(angestellte.length > 0, `data: ${JSON.stringify(body.data)}`);
+        angestellte.map(angestellter => angestellter.nachname)
             .forEach(nachname => client.assert(nachname.includes('a') || nachname.startsWith('A'), `nachname: ${JSON.stringify(nachname)}`));
     });
 %}
 
-### Suche Kunden mit nicht-vorhandenem Nachnamen als admin
+### Suche Angestellten mit nicht-vorhandenem Nachnamen als admin
 GRAPHQL {{graphqlUrl}}
 Authorization: Basic {{userAdmin}} {{password}}
 
 {
-  kunden(input: {nachname: "Nichtvorhanden"}) {
+  angestellte(input: {nachname: "Nichtvorhanden"}) {
     id
   }
 }

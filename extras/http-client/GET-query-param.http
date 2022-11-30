@@ -21,11 +21,11 @@ Authorization: Basic {{userAdmin}} {{password}}
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
         // TODO Optional Chaining
-        const kunden = body._embedded.kunden;
-        client.assert(Array.isArray(kunden), `body: ${JSON.stringify(body)}`);
-        client.assert(kunden.length > 0, `kunden: ${JSON.stringify(kunden)}`);
-        kunden.map(kunde => kunde.nachname)
-            .forEach(nachname => client.assert(nachname.includes('Alpha'), `kunden: ${JSON.stringify(kunden)}`));
+        const angestellte = body._embedded.angestellte;
+        client.assert(Array.isArray(angestellte), `body: ${JSON.stringify(body)}`);
+        client.assert(angestellte.length > 0, `angestellte: ${JSON.stringify(angestellte)}`);
+        angestellte.map(angestellter => angestellter.nachname)
+            .forEach(nachname => client.assert(nachname.includes('Alpha'), `angestellte: ${JSON.stringify(angestellte)}`));
     });
 %}
 
@@ -65,11 +65,11 @@ Authorization: Basic {{userAdmin}} {{password}}
     client.test('GET mit vorhandener Email: body mit Daten', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);
-        const kunden = body._embedded.kunden;
-        client.assert(Array.isArray(kunden), `body: ${JSON.stringify(body)}`);
-        client.assert(kunden.length === 1);
-        const kunde = kunden[0];
-        client.assert(kunde.email === 'admin@acme.com', `body: ${JSON.stringify(body)}`);
+        const angestellte = body._embedded.angestellte;
+        client.assert(Array.isArray(angestellte), `body: ${JSON.stringify(body)}`);
+        client.assert(angestellte.length === 1);
+        const angestellter = angestellte[0];
+        client.assert(angestellter.email === 'admin@acme.com', `body: ${JSON.stringify(body)}`);
     });
 %}
 

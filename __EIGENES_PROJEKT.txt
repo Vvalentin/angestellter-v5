@@ -25,7 +25,7 @@ In IntelliJ:
                     Additional commandline parametes   --enable-preview --source 19 --release 19 -Xlint:preview
 
 Beispiel 0 kopieren
-    In settings.gradle.kts z.B. "gesangverein" statt "kunde" eintragen
+    In settings.gradle.kts z.B. "gesangverein" statt "angestellter" eintragen
 
 -----------------------------------------------------------------------
 In einer Powershell für das eigene Projekt gesangverein

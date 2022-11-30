@@ -29,7 +29,7 @@ if ($versionMinimum -gt $versionCurrent) {
 $host.ui.RawUI.WindowTitle = 'kubescape'
 
 # https://github.com/zegl/kube-score
-$release = 'kunde'
+$release = 'angestellter'
 Set-Location ..\$release
 helm template $release . -f values.yaml -f dev.yaml > ${env:TEMP}\$release.yaml
 # app.kubernetes.io/created-by ist deprecated und wurde auch controls-inputs.json entfernt

@@ -30,4 +30,4 @@ pluginManagement {
 //    }
 // }
 
-rootProject.name = "kunde"
+rootProject.name = "angestellter"

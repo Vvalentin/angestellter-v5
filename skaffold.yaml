@@ -25,11 +25,11 @@
 apiVersion: skaffold/v4beta1
 kind: Config
 metadata:
-  name: kunde
+  name: angestellter
 # https://skaffold.dev/docs/pipeline-stages/builders
 build:
   artifacts:
-    - image: juergenzimmermann/kunde
+    - image: juergenzimmermann/angestellter
       # https://skaffold.dev/docs/pipeline-stages/builders/buildpacks
       # https://paketo.io/docs/howto/java
       # https://www.youtube.com/watch?v=aI19ZYV4-7o
@@ -48,9 +48,9 @@ deploy:
   # Alternativen: Kustomize, kpt, kubectl
   helm:
     releases:
-      - name: kunde
-        chartPath: extras/kunde
-        valuesFiles: [extras/kunde/values.yaml]
+      - name: angestellter
+        chartPath: extras/angestellter
+        valuesFiles: [extras/angestellter/values.yaml]
         namespace: acme
 profiles:
   - name: dev
@@ -59,12 +59,12 @@ profiles:
     deploy:
       helm:
         releases:
-          - name: kunde
-            chartPath: extras/kunde
-            valuesFiles: [extras/kunde/values.yaml, extras/kunde/dev.yaml]
+          - name: angestellter
+            chartPath: extras/angestellter
+            valuesFiles: [extras/angestellter/values.yaml, extras/angestellter/dev.yaml]
             namespace: acme
     # https://skaffold.dev/docs/pipeline-stages/port-forwarding
     portForward:
       - resourceType: service
-        resourceName: kunde
+        resourceName: angestellter
         port: http-svc

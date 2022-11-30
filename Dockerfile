@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Aufruf:   docker buildx build --tag juergenzimmermann/kunde:1.0.0-dockerfile .
+# Aufruf:   docker buildx build --tag juergenzimmermann/angestellter:1.0.0-dockerfile .
 #           Get-Content Dockerfile | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
 
 # https://docs.docker.com/engine/reference/builder/#syntax
@@ -41,7 +41,7 @@ COPY src ./src
 # Default-Kommando
 RUN <<EOF
 ./gradlew bootJar
-java -Djarmode=layertools -jar ./build/libs/kunde-1.0.0.jar extract
+java -Djarmode=layertools -jar ./build/libs/angestellter-1.0.0.jar extract
 EOF
 
 # ---------------------------------------------------------------------------------------
