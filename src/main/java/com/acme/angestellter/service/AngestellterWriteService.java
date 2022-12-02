@@ -23,15 +23,14 @@ import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.Objects;
 import java.util.UUID;
 
 /**
  * Anwendungslogik für Angestellten auch mit Bean Validation.
- * <img src="../../../../../asciidoc/AngestellterWriteService.svg" alt="Klassendiagramm">
  *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
+ *
+ *
  */
 @Service
 @RequiredArgsConstructor
@@ -39,14 +38,13 @@ import java.util.UUID;
 public final class AngestellterWriteService {
     private final AngestellterRepository repo;
 
-    // https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#validation-beanvalidation
     private final Validator validator;
 
     /**
      * Einen neuen Angestellten anlegen.
      *
      * @param angestellter Das Objekt des neu anzulegenden Angestellten.
-     * @return Der neu angelegte Angestellten mit generierter ID
+     * @return Der neu angelegte Angestellte mit generierter ID
      * @throws ConstraintViolationsException Falls mindestens ein Constraint verletzt ist.
      * @throws EmailExistsException Es gibt bereits einen Angestellten mit der Emailadresse.
      */
@@ -94,7 +92,6 @@ public final class AngestellterWriteService {
 
         final var email = angestellter.getEmail();
         final var angestellterDb = angestellterDbOptional.get();
-        // Ist die neue Email bei einem *ANDEREN* Angestellten vorhanden?
         if (!Objects.equals(email, angestellterDb.getEmail()) && repo.isEmailExisting(email)) {
             log.debug("update: email {} existiert", email);
             throw new EmailExistsException(email);

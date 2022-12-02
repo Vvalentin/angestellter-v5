@@ -29,13 +29,7 @@ import lombok.ToString;
 import java.time.LocalDate;
 import java.util.UUID;
 
-/**
- * Daten eines Angestellte. In DDD ist Angestellter ist ein Aggregate Root.
- * <img src="../../../../../asciidoc/Angestellter.svg" alt="Klassendiagramm">
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
- */
-// https://thorben-janssen.com/java-records-hibernate-jpa
+
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Getter
@@ -85,7 +79,7 @@ public class Angestellter {
     private boolean hasNewsletter;
 
     /**
-     * Das Geburtsdatum des Angestellte.
+     * Das Geburtsdatum des Angestellten.
      * @param geburtsdatum Das Geburtsdatum.
      * @return Das Geburtsdatum.
      */
@@ -94,7 +88,7 @@ public class Angestellter {
 
 
     /**
-     * Das Geschlecht des Angestellte.
+     * Das Geschlecht des Angestellten.
      * @param geschlecht Das Geschlecht.
      * @return Das Geschlecht.
      */

@@ -51,9 +51,9 @@ package com.acme.angestellter.entity #DDDDDD {
     }
 
     enum FamilienstandType {
-        LEDIG
         VERHEIRATET
         GESCHIEDEN
+        LEDIG
         VERWITWET
     }
 
@@ -69,7 +69,6 @@ package com.acme.angestellter.entity #DDDDDD {
     Angestellter *--> "1" Adresse : adresse
     Angestellter .down.> GeschlechtType
     Angestellter .down.> FamilienstandType
-    Angestellter .down.> InteresseType
 
     Angestellter ..> UUID
     Angestellter ..> LocalDate
@@ -80,6 +79,5 @@ package com.acme.angestellter.entity #DDDDDD {
 
 hide empty members
 
-footer (c) Jürgen Zimmermann
 
 @enduml

@@ -24,7 +24,7 @@ import lombok.Getter;
 /**
  * Exception, falls es mindestens ein verletztes Constraint gibt.
  *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
+ *
  */
 @Getter
 public class ConstraintViolationsException extends RuntimeException {

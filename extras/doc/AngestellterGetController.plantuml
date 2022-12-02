@@ -20,8 +20,10 @@ package org.springframework {
     package web.bind.annotation {
         interface "@PathVariable" as PathVariable
         interface "@RequestParam" as RequestParam
+        interface "@RequestMapping" as RequestMapping
         interface "@ExceptionHandler" as ExceptionHandler
         interface "@ResponseStatus" as ResponseStatus
+        interface "@GetMapping" as GetMapping
     }
 
     package http {
@@ -82,6 +84,5 @@ package com.acme.angestellter {
 
 hide empty members
 
-footer (c) Juergen Zimmermann
 
 @enduml

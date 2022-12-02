@@ -15,14 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.acme.angestellter.service;
-
 import com.acme.angestellter.entity.Angestellter;
 import com.acme.angestellter.repository.AngestellterRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +29,7 @@ import java.util.UUID;
 /**
  * Anwendungslogik für Angestellten.
  * <img src="../../../../../asciidoc/AngestellterReadService.svg" alt="Klassendiagramm">
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
+
  */
 @Service
 @RequiredArgsConstructor
@@ -44,7 +41,7 @@ public final class AngestellterReadService {
      * Einen Angestellten anhand seiner ID suchen.
      *
      * @param id Die Id des gesuchten Angestellten
-     * @return Der gefundene Angestellter
+     * @return Den gefundenen Angestellten
      * @throws NotFoundException Falls kein Angestellter gefunden wurde
      */
     public @NonNull Angestellter findById(final UUID id) {
