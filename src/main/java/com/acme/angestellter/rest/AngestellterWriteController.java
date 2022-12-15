@@ -57,9 +57,9 @@ import static org.springframework.http.ResponseEntity.created;
 /**
  * Eine `@RestController`-Klasse bildet die REST-Schnittstelle, wobei die HTTP-Methoden, Pfade und MIME-Typen auf die
  * Methoden der Klasse abgebildet werden.
- * <img src="../../../../../asciidoc/AngestellterWriteController.svg" alt="Klassendiagramm">
  *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
+ *
+ * <img src="C:\Users\Studi\IdeaProjects\angestellter-v5\extras\doc\builder >
  */
 @RestController
 @RequestMapping(REST_PATH)
@@ -75,7 +75,6 @@ class AngestellterWriteController {
     private final AngestellterPatcher patcher;
 
     private final UriHelper uriHelper;
-
     /**
      * Einen neuen Angestellter-Datensatz anlegen.
      *

@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2022 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package com.acme.angestellter.entity;
 
 import jakarta.validation.Valid;
@@ -29,7 +13,11 @@ import lombok.ToString;
 import java.time.LocalDate;
 import java.util.UUID;
 
-
+/**
+ * Entity des Angestellten.
+ *<img src="../../../../../asciidoc/Angestellter.svg" alt="Klassendiagramm">
+ */
+@NotNull
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Getter
@@ -45,7 +33,7 @@ public class Angestellter {
 
 
     /**
-     * Die ID des Angestellte.
+     * Die ID des Angestellten.
      * @param id Die ID.
      * @return Die ID.
      */
@@ -53,7 +41,7 @@ public class Angestellter {
     private UUID id;
 
     /**
-     * Der Nachname des Angestellte.
+     * Der Nachname des Angestellten.
      * @param nachname Der Nachname.
      * @return Der Nachname.
      */
@@ -72,7 +60,7 @@ public class Angestellter {
 
 
     /**
-     * Hat der Angestellter den Newsletter abonniert.
+     * Hat der Angestellte den Newsletter abonniert.
      * @param hasNewsletter Ist der Newsletter abonniert?
      * @return Ist der Newsletter abonniert?
      */

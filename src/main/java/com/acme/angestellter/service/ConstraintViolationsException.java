@@ -24,7 +24,6 @@ import lombok.Getter;
 /**
  * Exception, falls es mindestens ein verletztes Constraint gibt.
  *
- *
  */
 @Getter
 public class ConstraintViolationsException extends RuntimeException {

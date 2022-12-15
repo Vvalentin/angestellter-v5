@@ -19,11 +19,7 @@ package com.acme.angestellter.repository;
 import com.acme.angestellter.entity.Adresse;
 import com.acme.angestellter.entity.Angestellter;
 
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.Currency;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -35,12 +31,6 @@ import static com.acme.angestellter.entity.FamilienstandType.VERWITWET;
 import static com.acme.angestellter.entity.GeschlechtType.DIVERS;
 import static com.acme.angestellter.entity.GeschlechtType.MAENNLICH;
 import static com.acme.angestellter.entity.GeschlechtType.WEIBLICH;
-import static com.acme.angestellter.entity.InteresseType.LESEN;
-import static com.acme.angestellter.entity.InteresseType.REISEN;
-import static com.acme.angestellter.entity.InteresseType.SPORT;
-import static java.math.BigDecimal.ZERO;
-import static java.util.Collections.emptyList;
-import static java.util.Locale.GERMANY;
 
 /**
  * Emulation der Datenbasis für persistente Angestellten.
@@ -135,7 +125,7 @@ final class DB {
             )
             // CAVEAT Stream.toList() erstellt eine "immutable" List
             .collect(Collectors.toList());
-        } catch (final Exception ex) {
+        } catch (final ExceptionInInitializerError ex) {
             throw new IllegalStateException(ex);
         }
     }

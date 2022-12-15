@@ -31,14 +31,9 @@ import java.time.LocalDate;
  * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  * @param nachname Gültiger Nachname eines Angestellten, d.h. mit einem geeigneten Muster.
  * @param email Email eines Angestellten.
- * @param kategorie Kategorie eines Angestellten mit eingeschränkten Werten.
- * @param hasNewsletter Flag, ob es ein Newsletter-Abo gibt.
  * @param geburtsdatum Das Geburtsdatum eines Angestellten.
- * @param homepage Die Homepage eines Angestellten.
  * @param geschlecht Das Geschlecht eines Angestellten.
  * @param familienstand Der Familienstand eines Angestellten.
- * @param interessen Die Interessen eines Angestellten.
- * @param umsatz Der Umsatz eines Angestellten.
  * @param adresse Die Adresse eines Angestellten.
  */
 @SuppressWarnings("RecordComponentNumber")

@@ -108,17 +108,9 @@ Authorization: Basic {{userAdmin}} {{password}}
   angestellte {
     id
     nachname
-    kategorie
-    hasNewsletter
     geburtsdatum
-    homepage
     geschlecht
     familienstand
-    interessen
-    umsatz {
-      betrag
-      waehrung
-    }
     adresse {
       plz
       ort
@@ -154,17 +146,9 @@ Authorization: Basic {{userAdmin}} {{password}}
   angestellte(input: {email: "admin@acme.com"}) {
     id
     nachname
-    kategorie
-    hasNewsletter
     geburtsdatum
-    homepage
     geschlecht
     familienstand
-    interessen
-    umsatz {
-      betrag
-      waehrung
-    }
     adresse {
       plz
       ort
@@ -237,17 +221,9 @@ Authorization: Basic {{userAdmin}} {{password}}
     id
     nachname
     email
-    kategorie
-    hasNewsletter
     geburtsdatum
-    homepage
     geschlecht
     familienstand
-    interessen
-    umsatz {
-      betrag
-      waehrung
-    }
     adresse {
       plz
       ort

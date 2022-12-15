@@ -42,7 +42,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * Methoden der Klasse abgebildet werden.
  * <img src="../../../../../asciidoc/AngestellterGetController.svg" alt="Klassendiagramm">
  *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @RestController
 @RequestMapping(REST_PATH)

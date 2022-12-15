@@ -16,14 +16,11 @@
  */
 package com.acme.angestellter;
 
-import com.github.lalyos.jfiglet.FigletFont;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.catalina.util.ServerInfo;
 import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.SpringVersion;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
@@ -108,8 +105,8 @@ final class Banner {
     private static InetAddress getLocalhost() {
         try {
             return InetAddress.getLocalHost();
-        } catch (final UnknownHostException ex) {       // in ex ist Exception gefangen
-            throw new IllegalStateException(ex);        // Exeption wird in andere gepackt
-        }                                               //IllegalStateException ist abgeleitet von runtimeException,
-    }                                                   // RunTimeException muss nicht behandelt werden
+        } catch (final UnknownHostException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
 }

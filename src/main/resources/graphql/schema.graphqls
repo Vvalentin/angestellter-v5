@@ -34,9 +34,6 @@ type Mutation {
   create(input: AngestellterInput!): CreatePayload
 }
 
-# https://spec.graphql.org/draft/#sec-Types
-# https://www.graphql-scalars.dev/docs/scalars/email-address
-# https://www.graphql-scalars.dev/docs/scalars/local-date
 "Eigenschaften eines Angestellter-Datensatzes mit untergeordneten Eigenschaften"
 type Angestellter {
   "ID des Angestellten"
@@ -44,25 +41,12 @@ type Angestellter {
   "Nachname des Angestellten"
   nachname: String!
   email: String!
-  kategorie: Int!
-  hasNewsletter: Boolean!
   geburtsdatum: String
-  homepage: String
   geschlecht: String
   familienstand: String
-  interessen: [String!]
-  umsatz: Umsatz
   adresse: Adresse!
 }
 
-# https://www.graphql-scalars.dev/docs/scalars/currency
-"Daten zu einem Umsatz"
-type Umsatz {
-  "Der Betrag"
-  betrag: String!
-  "Die Währung"
-  waehrung: String!
-}
 
 type Adresse {
   "Postleitzahl der Adresse"
@@ -86,21 +70,13 @@ input AngestellterInput {
   nachname: String!
   "Emailadresse des neuen Angestellten"
   email: String!
-  kategorie: Int!
-  "Newsletter-Abo: true / false"
-  hasNewsletter: Boolean!
   "Geburtsdatum des neuen Angestellten"
   geburtsdatum: String
-  homepage: String
   "Geschlecht des neuen Angestellten: MAENNLICH, WEIBLICH, DIVERS"
   geschlecht: Geschlecht
   "Familienstand des neuen Angestellten: LEDIG, VERHEIRATET, GESCHIEDEN, VERWITWET"
   familienstand: Familienstand
-  "InteressEN des neuen Angestellten: SPORT, LESEN, REISEN"
-  interessen: [Interesse!]
   "Umsatzangabe zum neuen Angestellten"
-  umsatz: UmsatzInput
-  "Adresse des neuen Angestellten"
   adresse: AdresseInput!
 }
 
@@ -117,21 +93,6 @@ enum Familienstand {
   VERHEIRATET
   GESCHIEDEN
   VERWITWET
-}
-
-"Aufzählungstyp für die Interessen eines Angestellten"
-enum Interesse {
-  SPORT
-  LESEN
-  REISEN
-}
-
-"Umsatzeingabe für einen Angestellten: Neuanlegen oder Ändern"
-input UmsatzInput {
-  "Betrag"
-  betrag: String!
-  "Währung"
-  waehrung: String!
 }
 
 "Neue oder geänderte Adresse"

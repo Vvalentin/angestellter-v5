@@ -42,6 +42,7 @@ Content-Type: application/json
         client.assert(mimeType === "application/problem+json", `Falscher MIME-Typ: ${mimeType}`);
     });
 
+
     client.test('Einen neuen Angestellten mit bereits existierender Emailadresse anlegen: body mit ProblemDetail', () => {
         const body = response.body;
         client.assert(typeof body === 'object', `body: ${JSON.stringify(body)}`);

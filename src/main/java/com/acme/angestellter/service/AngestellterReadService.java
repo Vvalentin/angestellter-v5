@@ -28,8 +28,10 @@ import java.util.UUID;
 
 /**
  * Anwendungslogik für Angestellten.
- * <img src="../../../../../asciidoc/AngestellterReadService.svg" alt="Klassendiagramm">
-
+ *  * <img src="../../../../../asciidoc/AngestellterReadService.svg" alt="Klassendiagramm">
+ *  * Schreiboperationen werden mit Transaktionen durchgeführt und Lese-Operationen mit Readonly-Transaktionen:
+ *  * <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#transactions">siehe Dokumentation</a>.
+ *
  */
 @Service
 @RequiredArgsConstructor

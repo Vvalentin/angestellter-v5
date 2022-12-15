@@ -49,6 +49,7 @@ Authorization: Basic {{userAdmin}} {{password}}
         client.assert(status === 422, `Falscher Statuscode: ${status}`);
     });
 
+
     client.test('Einen Angestellten mittels PUT aktualisieren und Email existiert: application/problem+json', () => {
         const mimeType = response.contentType.mimeType;
         client.assert(mimeType === "application/problem+json", `Falscher MIME-Typ: ${mimeType}`);

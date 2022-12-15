@@ -28,9 +28,7 @@ import java.util.UUID;
 
 /**
  * Anwendungslogik für Angestellten auch mit Bean Validation.
- *
- *
- *
+ * <img src="../../../../../asciidoc/AngestellterWriteService.svg" alt="Klassendiagramm">
  */
 @Service
 @RequiredArgsConstructor
